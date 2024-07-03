@@ -1,0 +1,362 @@
+.all_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(0deg, rgb(1, 1, 1) 0.00%, rgb(27, 30, 37) 100.00%);
+}
+.register_background{
+position: absolute;
+bottom: 0   ;
+left: 0;
+width: 100%;
+transform: translateY(2.8rem);
+opacity: 0.7;
+
+}
+
+.register_background.up_background {
+    animation-duration: 1.2s; /* Slow down the rotation */
+    animation-fill-mode: forwards;
+    animation-name: mymoveup;
+}
+.register_background.down_background {
+    animation-duration: 1.2s; /* Slow down the rotation */
+    animation-fill-mode: forwards;
+    animation-name: mymovedown;
+}
+
+@keyframes mymovedown {
+    from {
+        transform: translateY(-1rem);    }
+    to {
+        transform: translateY(4rem);    }
+}
+@keyframes mymoveup {
+    from {
+        transform: translateY(4rem);      
+    }
+    to {
+        transform: translateY(-1rem);   }
+}
+.login-container, .register-container {
+    width: 100%;
+    display: flex;
+   
+    flex-direction: column;
+   
+    justify-content: center;
+    gap: 15px;
+}
+.register-container-slideleft {
+    width: 100%;
+    display: flex;
+   
+    flex-direction: column;
+   
+    justify-content: center;
+    gap: 15px;
+    animation-duration: 1.2s; 
+    animation-fill-mode: forwards;
+    animation-name: Slideleft;
+  }
+  .verify_email_present {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    background-color: #333;
+    transform: translateX(120%);
+    z-index: 10; /* Ensure visibility */
+    gap: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+}
+
+
+
+.verify_email_sent h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.verify_email_sent p {
+    margin: 5px 0;
+    font-size: 1em;
+    text-align: center;
+    color: rgba(176, 176, 176, 0.989);
+}
+.forgetpasscntainer{
+display: flex;
+margin-top: -10px;
+width: 98%;
+align-items: center;
+justify-content: end;
+color: #de0d33;
+}
+.forgetpasscntainer a {color: #de0d33; font-size: 0.9rem;}
+  .verify_email_sent {
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.694);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 25%;
+    height: 40%;
+    width: 100%;
+    color: white;
+   
+    flex-direction: column;
+   background-color: #333;
+    justify-content: center;
+    gap: 15px;
+    animation-duration: 1.2s; 
+    animation-fill-mode: forwards;
+    animation-name: Slideleftt;
+  }
+ .email-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+  @keyframes Slideleft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-150%);
+      opacity: 1;
+    }
+  }
+  @keyframes Slideleftt {
+    from {
+      transform: translateX(120%);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+.inthemidlle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.title, .desc {
+    color: white;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+ 
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+}
+.namescontainer{
+    width: 90%;
+}
+.toggle-visibility{
+  position: absolute;
+  color: #979797;
+    right: -40px;
+}
+.input-container .input-icon {
+    position: absolute;
+    left: 10px;
+    color: #de0d33;
+}
+
+.account-controls {
+    display: flex;
+    justify-content: center;
+}
+
+.nameinner {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.namecontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-controls button {
+    padding: 10px 20px;
+    background-color: #de0d33;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.account-controls button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 10px -5px #de0d33;
+}
+
+.line {
+    width: 90%;
+    height: 2px;
+    background-color: #bfc0c9;
+    margin: 10px 0;
+}
+
+.other-login-text, .signup-text {
+    color: white;
+    text-align: center;
+}
+
+#form-toggler {
+    cursor: pointer;
+    color: #de0d33;
+    text-decoration: none;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.form-container {
+    
+    width: 40%;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    perspective: 1000px; 
+    transform-style: preserve-3d; 
+  }
+  
+  .form-container-log-logining,
+  .form-container-register,
+  .form-container-log-loginingout,
+  .form-container-registerout {
+    width: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    animation-duration: 1.2s; /* Slow down the rotation */
+    animation-fill-mode: forwards;
+  }
+  .form-container-log{
+    transform: translateY(-100%);
+    opacity: 0;
+    position: absolute;
+  }
+  .form-container-log-logining {
+    position: absolute;
+    animation-name: rotateLogin;
+  }
+  .form-container-log-loginingout {position: absolute;
+    animation-name: loginout;
+  }
+  
+  .form-container-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation-name: rotateRegister;
+  }
+  .form-container-registerout {
+    animation-name: registernout;
+  }
+  .form-container-log-logining .input-container , .form-container-log-loginingout .input-container{
+width: 90%;
+  }
+  @keyframes rotateLogin {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes loginout {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes registernout {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+  @keyframes rotateRegister {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: rotateY(200%);
+      opacity: 1;
+    }
+  }
+  

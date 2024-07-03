@@ -1,0 +1,67 @@
+.vendre-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four columns per row by default */
+    gap: 20px; /* Space between cards */
+    margin-top: 20px;
+    padding: 0 20px; /* Added padding to maintain space on the sides */
+  }
+  
+  .vendre-card {
+    width: 90%; /* Initially, each card takes full width */
+    height: 270px; /* Adjusted height */
+    background-color: #393232;
+    border: 1px solid #de0d33;
+    border-radius: 5px;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+
+  }
+  
+  .vendre-card img {
+    width: 100%;
+    border-radius: 5px;
+    height: 60%; /* Adjust the image height */
+    object-fit: cover; /* Maintain aspect ratio */
+    transition: transform 0.3s ease;
+  }
+  
+  .card-description {
+    background-color: #de0d33;
+    padding: 10px;
+    color: #fff;
+    border: 1px solid #de0d33;
+    transition: background-color 0.3s ease;
+  }
+  
+  .vendre-card:hover {
+    background-color: #5c5959; /* Lighter background color on hover */
+    transform: translateY(-10px); /* Move the card up on hover */
+  }
+  
+  .vendre-card:hover img {
+    transform: scale(1.05); /* Zoom in the image on hover */
+  }
+  
+  /* Media Queries for Responsive Design */
+  
+  @media (max-width: 1200px) {
+    .vendre-cards {
+      grid-template-columns: repeat(3, 1fr); /* Three columns per row */
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .vendre-cards {
+      grid-template-columns: repeat(2, 1fr); /* Two columns per row */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .vendre-cards {
+      grid-template-columns: repeat(1, 1fr); /* One column per row */
+    }
+  }
+  

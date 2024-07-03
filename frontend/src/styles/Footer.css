@@ -1,0 +1,39 @@
+/* Footer.css */
+
+footer {
+  background-color: #111; /* Dark background color */
+  color: #fff; /* Light font color */
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left-content {
+  text-align: left;
+  max-width: 300px;
+}
+
+.left-content p {
+  margin-bottom: 10px;
+}
+
+.right-content {
+  text-align: right;
+}
+
+.contact-link {
+  color: #de0d33; /* Red color */
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.contact-link:hover {
+  text-decoration: underline; /* Underline on hover */
+}

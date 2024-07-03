@@ -1,0 +1,31 @@
+/* Body.css */
+
+.body-container {
+    background-color: #222; /* Dark background color for the entire page */
+    color: #eee; /* Light font color for text */
+    margin: 0; /* Remove default margin */
+    padding-top: 100px; /* Adjust padding to create space below fixed nav */
+    font-family: Arial, sans-serif; /* Example: Change font family */
+}
+
+section {
+    padding: 20px;
+    margin-bottom: 10px; /* Adjusted smaller margin bottom */
+    border-bottom: 1px solid #444;
+    border-bottom-width: 60%; /* Adjusted width of the bottom border */
+}
+
+/* Specific styles for different sections */
+section:last-child {
+    border-bottom: none; /* Remove bottom border from the last section */
+}
+
+/* Example: Specific styles for headings */
+section h2 {
+    color: #de0d33; /* Red text color for headings */
+}
+
+/* Example: Additional styling for specific elements */
+.section-content {
+    margin-top: 10px; /* Example: Add margin to specific content */
+}
