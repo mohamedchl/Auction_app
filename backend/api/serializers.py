@@ -46,7 +46,7 @@ class EmailSerializer(serializers.Serializer):
 
     def validate_email(self, value):
         if not User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("There is no user registered with this email address.")
+            raise serializers.ValidationError("Aucun compte associé à cet email n'a été trouvé.")
         return value
 
 

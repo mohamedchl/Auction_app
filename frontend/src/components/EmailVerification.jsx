@@ -1,42 +1,51 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/verification_email.css';
 
 const EmailVerification = () => {
     const { token } = useParams();
     const [message, setMessage] = useState('Verifying...');
     const navigate = useNavigate();
     const renderAfterCalled = useRef(false);
+    const [Contacter, setcontacter] = useState('');
 
     useEffect(() => {
-        const verifyEmail = async () => {
+        const verifierEmail = async () => {
             if (!renderAfterCalled.current) {
-                renderAfterCalled.current = true; // Set it to true before making the request
+                renderAfterCalled.current = true; // Le mettre à true avant de faire la requête
                 try {
                     const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/verify-email/`, {
                         params: { token }
                     });
                     if (response.status === 200) {
-                        setMessage('Email verified successfully! Redirecting to login page...');
+                        setMessage('Email vérifié avec succès ! Redirection vers la page de connexion...');
                         setTimeout(() => {
-                            navigate("/login");
+                            navigate("/connection");
                         }, 3000);
                     } else {
-                        setMessage('Failed to verify email. Please try again.');
+                        setMessage('Échec de la vérification de l\'email. Veuillez réessayer.');
+                        setcontacter("Contacter notre support pour plus d'information");
                     }
                 } catch (error) {
-                    setMessage('Invalid or expired verification link.');
-                    console.error('Verification error:', error);
+                    setMessage('Lien de vérification invalide ou expiré.');
+                    setcontacter("Contacter notre support pour plus d'information");
+
+                    console.error('Erreur de vérification :', error);
                 }
             }
         };
+        
 
-        verifyEmail();
+        verifierEmail();
     }, []);
 
     return (
-        <div className="verification-container">
+        <div className="verification-email-container">
+            <div id="message-verifivation_email_container">
             <h1>{message}</h1>
+            <p>{Contacter}</p>
+            </div>
         </div>
     );
 };

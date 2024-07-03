@@ -10,7 +10,7 @@ import mini_logo from '../assets/photos/mini_logo.png';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 
 
-const RegisterForm = () => {
+const RegisterForm = ({ method }) => {
     const [email, setEmail] = useState("");
     const [emaillogin, setEmailLogin] = useState("");
     const [password, setPassword] = useState("");
@@ -24,8 +24,8 @@ const RegisterForm = () => {
     const [lastname, setLastname] = useState("");
     const [loading, setLoading] = useState(false);
     const [showRegister, setShowRegister] = useState(true);
-    const [logincontainer, setLoginContainer] = useState('form-container-log');
-    const [registercontainer, setRegisterContainer] = useState('form-container-register');
+    const [logincontainer, setLoginContainer] = useState('form-register-start');
+    const [registercontainer, setRegisterContainer] = useState('form-register-start');
     const [emailError, setEmailError] = useState('');
     const [firstnameError, setFirstnameError] = useState('');
     const [lastnameError, setLastnameError] = useState('');
@@ -39,12 +39,18 @@ const RegisterForm = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Simulate logo animation on mount
-        const logo = document.getElementById('logo_mini');
-        if (logo) {
-            logo.style.opacity = '1';
-            logo.style.transition = 'opacity 1s ease';
-        }
+
+       if (method === "Login"){
+        setShowRegister(false);
+        setRegisterContainer('form-register-start');
+        setLoginContainer('form-container-log-logining');
+       }else if(method === "Register"){
+        setShowRegister(true)
+        setRegisterContainer('form-container-register');
+        setLoginContainer('form-container-log');
+       }
+  
+ 
     }, []);
 
     // Validation functions
@@ -59,9 +65,17 @@ const RegisterForm = () => {
     };
 
     const validatePassword = (password) => {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        return passwordRegex.test(password);
-    };
+      if (password.length < 8) {
+          return false;
+      }
+  
+      const hasLetter = /[A-Za-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+  
+      return hasLetter && hasNumber;
+  };
+  
+  
     const togglePasswordVisibility = (num) => {
      switch(num) { case 1 :setIsPasswordVisible(!isPasswordVisible); break;
       case 2 :setIsconfirmPasswordVisible(!isconfirmPasswordVisible); break;
@@ -79,7 +93,7 @@ const RegisterForm = () => {
         setFirstnameError('');
         setLastnameError('');
         setPasswordError('');
-
+setconfirmPasswordError('')
         // Validate email format
         if (!validateEmail(email)) {
             setEmailError("Veuillez saisir une adresse e-mail valide de Gmail, Yahoo ou Hotmail.");
@@ -101,13 +115,18 @@ const RegisterForm = () => {
             setPasswordError('Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre.');
             isValid = false;
         }
-
+        if (password !== confirmpassword) {
+          setconfirmPasswordError('Les deux mots de passe doivent être identiques.');
+          isValid = false;
+      }
         // Check for missing fields
-        if (!email || !firstname || !lastname || !password) {
+        if (!email || !firstname || !lastname || !password || !confirmpassword) {
             if (!email) setEmailError('Veuillez remplir ce champ.');
             if (!firstname) setFirstnameError('Veuillez remplir ce champ.');
             if (!lastname) setLastnameError('Veuillez remplir ce champ.');
             if (!password) setPasswordError('Veuillez remplir ce champ.');
+            if (!confirmpassword) setPasswordError('Veuillez remplir ce champ.');
+
             isValid = false;
         }
 
@@ -222,6 +241,11 @@ setconfirmPasswordError('Les deux mots de passe doivent être identiques.')
     const handlePasswordChange = (e) => {
         const value = e.target.value;
         setPassword(value);
+        if (confirmpassword !== value && confirmpassword !== '') {
+          setconfirmPasswordError('Les deux mots de passe doivent être identiques.')
+        }else {
+          setconfirmPasswordError('');
+        }
         if (value === '') {
             setPasswordError('');
         } else if (!validatePassword(value)) {
@@ -254,7 +278,7 @@ setconfirmPasswordError('Les deux mots de passe doivent être identiques.')
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
             />
             <div className="inthemidlle">
-            <img className='modal_img' src={mini_logo} style={{ width: "10%", height: "10%", marginBottom: "0px", opacity: '0' }} alt="logo" id='logo_mini' />
+            <img className='modal_img' src={mini_logo} style={{ width: "10%", height: "10%", marginBottom: "0px", opacity: '1' }} alt="logo" id='logo_mini' />
             <h1 className="title">Signup</h1>
             <p className="desc">
               'Create your account to upload or download pictures, videos, or music'
@@ -382,7 +406,7 @@ setconfirmPasswordError('Les deux mots de passe doivent être identiques.')
               rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
             />
-            <img className='modal_img' src={mini_logo} style={{ width: "5%", height: "10%", marginBottom: "0px", opacity: '0' }} alt="logo" id='logo_mini' />
+            <img className='modal_img' src={mini_logo} style={{ width: "10%", height: "10%", marginBottom: "0px", opacity: '1' }} alt="logo" id='logo_mini' />
             <h1 className="title">Login</h1>
             <p className="desc">
               Login to your account

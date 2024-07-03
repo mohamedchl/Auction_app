@@ -28,7 +28,7 @@ const CustomModal = ({ show, handleClose }) => {
   const [loading, setLoading] = useState(false);
 
   const navigatetoregiste = () => {
-    navigate('/register');
+    navigate('/inscription');
   };
 
   const handleloginSubmit = async (e) => {

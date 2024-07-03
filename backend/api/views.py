@@ -35,6 +35,7 @@ import os
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.conf import settings
+from django.contrib.auth.hashers import check_password
 
 
 User = get_user_model()
@@ -246,6 +247,9 @@ def reset_password(request):
         user = None
 
     if user is not None and PasswordResetTokenGenerator().check_token(user, token):
+        if check_password(new_password, user.password):
+            return Response({"message": "same_password"}, status=status.HTTP_200_OK)
+
         user.set_password(new_password)
         user.save()
         return Response({"message": "Password reset successful"}, status=status.HTTP_200_OK)
@@ -264,24 +268,34 @@ class ResetPassword(generics.GenericAPIView):
         user = User.objects.filter(email=email).first()
         
         if user:
-            print("hda email :",os.getenv("EMAIL_HOST_USER"))
+       
             encoded_pk = urlsafe_base64_encode(force_bytes(user.pk))
             token = PasswordResetTokenGenerator().make_token(user)
             reset_url = reverse("reset_password", kwargs={"encoded_pk": encoded_pk, "token": token})
-            reset_url = f"http://localhost:5173{reset_url}"  # Use your actual domain
+            reset_url = f"http://localhost:5173{reset_url}"  # Utilisez votre domaine réel
 
-            # Send the email to the user's email address
-            subject = 'Password Reset'
-            message = f'Click the link below to reset your password:\n{reset_url}'
+            # Envoyer l'email à l'adresse email de l'utilisateur
+            subject = 'Réinitialisation du mot de passe'
+            message = f'Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :\n{reset_url}'
             from_email = os.getenv("EMAIL_HOST_USER")
             recipient_list = [user.email]
             send_mail(subject, message, from_email, recipient_list)
+            socialuser = SocialAccount.objects.filter(user=user).first() 
+            if socialuser :
+                            return Response(
+                {"message": "Google account"},
+                status=status.HTTP_200_OK)   
 
-        # Always return the same response to avoid disclosing user existence
-        return Response(
-            {"message": "If an account with this email exists, a password reset link has been sent."},
-            status=status.HTTP_200_OK
-        )
+            return Response(
+                {"message": "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse email."},
+                status=status.HTTP_200_OK
+            )
+        else:
+            return Response(
+                {"message": "Aucun compte associé à cet email n'a été trouvé."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
     
 class VerifyEmail(APIView):
     permission_classes = [AllowAny]

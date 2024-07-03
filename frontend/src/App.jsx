@@ -14,7 +14,7 @@ import Body from './components/Body';
 
 function Logout() {
   localStorage.clear()
-  return <Navigate to="/register" />
+  return <Login />
 }
 
 function RegisterAndLogout() {
@@ -33,9 +33,9 @@ function App() {
           
           }
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<RegisterAndLogout />} />
+        <Route path="/connection" element={<Login />} />
+        <Route path="/disconnection" element={<Logout />} />
+        <Route path="/inscription" element={<RegisterAndLogout />} />
         <Route path="/google" element={<OAuthCallback />} />
         <Route path="/reset-password" element={<Email_password_reset />} />
         <Route path="/verify-email/:token" element={<EmailVerification />} />
